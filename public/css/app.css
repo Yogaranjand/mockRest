@@ -1,0 +1,35 @@
+@font-face {
+    font-family: 'Glyphicons Halflings';
+    src: url('../../fonts/glyphicons-halflings-regular.eot');
+    src: url('../../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+
+#application-form,
+#application-update-form {
+    margin-top: 35%;
+}
+
+#application-update-form .form-heading,
+#application-form .form-heading {
+    margin: 5%;
+    font-weight: bold;
+}
+
+#application-detail-table {
+    margin-top: 10%;
+}
+
+#application-detail-table .panel-heading {
+    font-weight: 700;
+}
+
+#application-detail-table .panel button.btn {
+    margin-top: -6px;
+}
+
+.action-application-edit,
+.action-application-delete {
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: -5px;
+}
