@@ -1,1 +1,14 @@
-{{message}}
+<div class="row">
+    <div class="col-sm-6 col-md-4 col-lg-3 col-sm-offset-3 col-md-offset-4 col-lg-offset-4">
+        <div class="bg-info text-center" ng-if="message.length === 0">No API Found</div>
+        <div class="list-group" ng-if="message.length > 0">
+                <a class="list-group-item item-header" ng-if="message.length >0 ">
+                        APIs
+                    </a>
+            <a class="list-group-item" ng-repeat="item in message" ng-href="#!/applications/info/{{application.id}}" title="Click To See The Application Details">{{item}}
+			    
+			</a>
+        </div>
+
+    </div>
+</div>

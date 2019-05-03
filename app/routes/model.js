@@ -10,6 +10,7 @@ var _ = require('lodash');
 const faker = require('faker');
 const Model = require('../models').Model;
 const AppModel = require('../models').AppModel;
+const ModelData = require('../models').ModelData;
 
 let currentFilename;
 let appId;
@@ -55,6 +56,29 @@ router.route('/links/:id')
             successRespons(res, linkArr);
         })
         .catch(next);
+
+});
+router.route('/apilist/:modelId/:api/:modelDataId')
+.get((req, res, next) => {
+    const { modelId, api, modelDataId} = req.params;
+    console.log(modelId, api, modelDataId, typeof modelDataId);
+    console.log("hello 6666", api.trim() == 'GET', typeof api);
+    console.log("hello 7777", modelDataId == '0')
+    if (api.trim() == 'GET' && modelDataId === '0') {
+        console.log("coming here");
+        ModelData.getModelData(modelId)
+            .then((response) => {
+                successRespons(res, response);
+            })
+            .catch(next);
+    } else if (api === 'GET' && modelDataId) {
+        ModelData.getModelDataById(modelDataId)
+        .then((response) => {
+            successRespons(res, response);
+        })
+        .catch(next);
+    }
+        
 
 });
 
