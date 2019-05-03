@@ -62,8 +62,8 @@ router.route('/apilist/:modelId/:api/:modelDataId')
 .get((req, res, next) => {
     const { modelId, api, modelDataId} = req.params;
     console.log(modelId, api, modelDataId, typeof modelDataId);
-    console.log("hello 6666", api.trim() == 'GET', typeof api);
-    console.log("hello 7777", modelDataId == '0')
+    console.log("hello 6666", api.trim() === 'GET' && modelDataId);
+    console.log("hello 7777", modelDataId !== '0')
     if (api.trim() == 'GET' && modelDataId === '0') {
         console.log("coming here");
         ModelData.getModelData(modelId)
@@ -71,7 +71,7 @@ router.route('/apilist/:modelId/:api/:modelDataId')
                 successRespons(res, response);
             })
             .catch(next);
-    } else if (api === 'GET' && modelDataId) {
+    } else if (api.trim() === 'GET' && modelDataId) {
         ModelData.getModelDataById(modelDataId)
         .then((response) => {
             successRespons(res, response);

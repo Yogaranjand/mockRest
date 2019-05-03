@@ -29,7 +29,7 @@
                 return Promise.reject(error);
             }
             let modelApi = '/api/models/apilist';
-            api = api.split('-').shift();
+            api = api.split('-').shift().trim();
             console.log("api ====", api);
             modelDataId = (modelDataId) ? modelDataId : 0;
             const apiUrl = `${modelApi}/${modelId}/${api}/${modelDataId}`;
@@ -40,6 +40,25 @@
                     console.log("data 2222===", data);
                     return data;
                 });
+        }
+
+        function create(payload, modelId) {
+            if (!modelId || !payload) {
+                return Promise.reject('All Fields Are Mandatory');
+            }
+            const payloadObj = { data: payload, modelId: payload }
+            let url = '/api/models/createRecord';
+            return $http.post(url, payloadObj)
+                .then(res => {
+                    const { isSuccess, data } = res.data;
+                    console.log(" data createcreatecreatecreate====", data);
+                    if (data) {
+                        const message = isSuccess ? 'Application Successfully Created' : 'Sorry Try Again !';
+                        return generateObjectForNotifyJs(message, isSuccess);
+                    }
+                }, error => {
+                    console.log("error >>>>>>", err);
+                })
         }
 
         return {

@@ -14,12 +14,22 @@
 </div>
 <div style="margin-left:30%; width:100%" class="row" ng-if="showtextbox">
     Please enter Id of the record
-    <input type="text" ng-model="modelDataId"/>
-    <button type="button" ng-click="triggerApi()"> Get Record</button>
+    <input type="text" name="" ng-model="dataid"/>
+    <button type="button" ng-click="triggerApi(dataid)"> Get Record</button>
 </div>
 <div class="row" ng-if="getMessagedata" style="margin-left:30%; width:100%">
     <textarea name="" id="" cols="100" rows="10" value="getMessagedata">
             {{getMessagedata}}
     </textarea>
     
+</div>
+<div class="row" ng-if="postPayload" style="margin-left:30%; width:100%">
+        <div>
+                <textarea name="" id="" cols="100" rows="10" ng-model="payload">
+                </textarea>
+        </div>
+        <div>
+                <button type="button" ng-click="postModeldata(payload)"> Get Record</button>
+        </div>
+        
 </div>
