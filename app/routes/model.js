@@ -57,9 +57,11 @@ function processFile(appId) {
     let fakerData = {};
     let modelId;
     let filePath
+    let modelName;
     return Promise.try(function () {
         filePath = path.join(__dirname, '../../uploads/', currentFilename);
-        var obj = JSON.parse(fs.readFileSync(filePath, 'utf8'));  
+        var obj = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+        modelName = obj['$schema'];
         let properties = obj.properties;
         _.forEach(Object.keys(properties), (item) => {
             if ( typeof properties[item] === 'object') {
@@ -78,8 +80,7 @@ function processFile(appId) {
         });
         return obj;
     }).then(function (obj) {
-        
-        return Model.createNewModel(JSON.stringify(obj));
+        return Model.createNewModel(JSON.stringify(obj), modelName);
     }).then((response) => {
         modelId = response.results.insertId;
         return Model.insertModelData(modelId, JSON.stringify(fakerData));

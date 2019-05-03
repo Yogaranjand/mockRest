@@ -30,14 +30,15 @@ function getApplicationById(id) {
     return execQuery(query);
 }
 
-function createNewModel(model) {
+function createNewModel(model, modelName) {
     if (!model) {
         const error = new TypeError('model Should Not Be Empty');
         return Promise.reject(error);
     }
     const query = `INSERT INTO models SET ?`
     const values = {
-        model_content: model
+        model_content: model,
+        model_name: modelName
     };
     return execQuery(query, values);
 }

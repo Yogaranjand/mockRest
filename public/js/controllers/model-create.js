@@ -14,7 +14,7 @@
         }
         vm.upload = function(file) {
             Upload.upload({
-                url: 'http://localhost:3030/api/models?appId =1',
+                url: 'http://localhost:3030/api/models?appId=1',
                 data: { file: file, appId: 1 },
 
             }).then(function(resp) {
