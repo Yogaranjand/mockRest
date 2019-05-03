@@ -1,0 +1,84 @@
+{
+  "$id": "https://schema.example.com/interesting-stuff",
+  "$schema": "user-profile",
+  "required": ["stuffWorthEmailingAbout", "email", "title"],
+  "properties": {
+      "title": {
+          "type": "string"
+      },
+      "stuffWorthEmailingAbout": {
+          "type": "string"
+      },
+      "email": {
+          "type": "string",
+          "format": "email"
+      },
+      "cc": false
+  },
+  "links": [
+    {
+        "title": "Search PDF Sections",
+        "description": "Retrieves a set of PDF sections which match the provided search criteria.",
+        "href": "/v1/pdf-sections",
+        "method": "GET",
+        "rel": "instances",
+        "schema": {
+            "$merge": {
+                "source": {
+                    "$ref": "mixins/search-options"
+                },
+                "with": {
+                    "$ref": "pdf-section#/searchTerms"
+                }
+            }
+        },
+        "targetSchema": {
+            "$ref": "mixins/pdf-section-search-response"
+        },
+        "isMultiDoc": true
+    },
+    {
+        "title": "Get PDF Section Instance",
+        "description": "Returns the PDF section whose database ID matches {id}.",
+        "href": "/v1/pdf-sections/{id}",
+        "method": "GET",
+        "rel": "self",
+        "schema": {
+            "$ref": "mixins/instance-options"
+        },
+        "targetSchema": {
+            "$ref": "pdf-section"
+        }
+    },
+    {
+        "title": "Patch PDF Section",
+        "description": "Modifies specific properties of the PDF section with {id} as specified within the request body.",
+        "href": "/v1/pdf-sections/{id}",
+        "method": "PATCH",
+        "rel": "self",
+        "privilege": "PDF-SECTIONS_MANAGE",
+        "auditAction": "UPDATE_PDF_SECTION",
+        "schema": {
+            "$ref": "pdf-section"
+        },
+        "targetSchema": {
+            "$ref": "mixins/generic-response"
+        }
+    },
+    {
+        "title": "Revert PDF Sections",
+        "description": "Reverts sectionContent of one or more PDF Sections to default values.",
+        "href": "/v1/pdf-sections/revert",
+        "method": "POST",
+        "rel": "revert",
+        "privilege": "PDF-SECTIONS_MANAGE",
+        "auditAction": "UPDATE_PDF_SECTION",
+        "schema": {
+            "$ref": "mixins/pdf-section-revert-request"
+        },
+        "targetSchema": {
+            "$ref": "mixins/pdf-section-revert-response"
+        }
+    }
+  ]
+}

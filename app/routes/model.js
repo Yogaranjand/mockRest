@@ -40,28 +40,28 @@ var upload = multer({ //multer settings
 }).single('file');
 
 router.route('/links/:id')
-.get((req, res, next) => {
-    const { id } = req.params;
-    console.log("hello")
-    Model.getSchemaLinks(id)
-        .then((response) => {
-            let modelContent = JSON.parse(response.results[0]['model_content']);
-            let linkArr = [];
-            _.forEach(modelContent.links, (item) => {
-                let link = item.method +" - "+ item.href;
-                linkArr.push(link);
-            });
-            console.log("linkArr ===", linkArr);
-            successRespons(res, linkArr);
-        })
-        .catch(next);
+    .get((req, res, next) => {
+        const { id } = req.params;
+        console.log("hello")
+        Model.getSchemaLinks(id)
+            .then((response) => {
+                let modelContent = JSON.parse(response.results[0]['model_content']);
+                let linkArr = [];
+                _.forEach(modelContent.links, (item) => {
+                    let link = item.method + " - " + item.href;
+                    linkArr.push(link);
+                });
+                console.log("linkArr ===", linkArr);
+                successRespons(res, linkArr);
+            })
+            .catch(next);
 
-});
+    });
 
 router.route('/')
 
 .post((req, res, next) => {
-    let query =res.req.query;
+    let query = res.req.query;
     appId = parseInt(query[Object.keys(query)[0]]);
     upload(req, res, function(err) {
         if (err) {
@@ -79,13 +79,13 @@ function processFile(appId) {
     let modelId;
     let filePath
     let modelName;
-    return Promise.try(function () {
+    return Promise.try(function() {
         filePath = path.join(__dirname, '../../uploads/', currentFilename);
         var obj = JSON.parse(fs.readFileSync(filePath, 'utf8'));
         modelName = obj['$schema'];
         let properties = obj.properties;
         _.forEach(Object.keys(properties), (item) => {
-            if ( typeof properties[item] === 'object') {
+            if (typeof properties[item] === 'object') {
                 if (properties[item].type === 'string') {
                     fakerData[item] = faker.name.firstName();
                 } else if (properties[item].type === 'array') {
@@ -100,7 +100,7 @@ function processFile(appId) {
             }
         });
         return obj;
-    }).then(function (obj) {
+    }).then(function(obj) {
         return Model.createNewModel(JSON.stringify(obj), modelName);
     }).then((response) => {
         modelId = response.results.insertId;
@@ -116,7 +116,7 @@ function processFile(appId) {
         //console.log("response =======", modelContent);
         let linkArr = [];
         _.forEach(modelContent.links, (item) => {
-            let link = item.method +" - "+ item.href;
+            let link = item.method + " - " + item.href;
             linkArr.push(link);
         })
         console.log("linkArr =======", linkArr);
@@ -125,7 +125,7 @@ function processFile(appId) {
     }).then((res) => {
         console.log();
     });
-    
+
 }
 
 
