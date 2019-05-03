@@ -95,6 +95,18 @@ router.route('/:id')
 
 })
 
+router.route('/models/:id')
+    .get((req, res, next) => {
+        const { id } = req.params;
+        Application.getModelsByApplicationId(id)
+            .then(data => {
+                const { results } = data;
+                successRespons(res, results)
+            })
+            .catch(next);
+
+    });
+
 
 router.use(errorHandler)
 

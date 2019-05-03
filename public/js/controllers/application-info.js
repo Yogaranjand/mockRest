@@ -14,16 +14,17 @@
                 const { isSuccess } = data;
 
                 if (isSuccess) {
-
-                    const { application_id, application_name, application_acronym } = data.Application;
+                    const { application_id, application_name, application_acronym } = data.application;
                     const applicationObj = {
                         id: application_id,
                         applicationName: application_name,
-                        acronym: application_acronym
+                        acronym: application_acronym,
+                        models: data.models
                     };
-                    $scope.applicationProperties = Object.keys(applicationObj)
+                    $scope.applicationProperties = Object.keys(applicationObj);
 
                     $scope.application = Object.assign({}, applicationObj);
+
                 } else {
                     $scope.isApplicationExist = false;
                     $scope.message = data.message;

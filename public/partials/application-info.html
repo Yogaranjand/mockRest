@@ -23,6 +23,18 @@
                     </tr>
                 </table>
             </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Available Models
+                    <br>
+                </div>
+                <table class="table table-hover">
+                    <tr ng-repeat="model in application.models">
+                        <td>Model Name</td>
+                        <td>{{model.model_name}}</td>
+                    </tr>
+                </table>
+            </div>
         </div>
         <a href="#!/applications">See List Of All Applications</a>
         <div ng-if="!application" class="bg-danger">{{message}}</div>

@@ -41,13 +41,21 @@
             return $http.get(apiUrl)
                 .then(res => {
                     const { data, isSuccess } = res.data;
-                    if (data) {
-                        const message = isSuccess ? 'Application Details Retrived Successfully' : 'Sorry!, Something Went Wrong';
-                        const resData = generateObjectForNotifyJs(message, isSuccess);
-                        resData.Application = Array.isArray(data) && data[0] || {};
-                        return resData;
-                    }
-                })
+                    return data;
+                }).then(appData => {
+                    const apiModelUrl = `${applicationsAPI}/models/${ApplicationId}`;
+                    return $http.get(apiModelUrl)
+                        .then(res => {
+                            const { data, isSuccess } = res.data;
+                            if (data) {
+                                const message = isSuccess ? 'Details Retrived Successfully' : 'Sorry!, Something Went Wrong';
+                                const resData = generateObjectForNotifyJs(message, isSuccess);
+                                resData.application = Array.isArray(appData) && appData[0] || {};
+                                resData.models = data;
+                                return resData;
+                            }
+                        });
+                });
         }
 
         function getAll() {

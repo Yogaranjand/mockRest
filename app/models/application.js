@@ -30,6 +30,18 @@ function getApplicationById(id) {
     return execQuery(query);
 }
 
+
+
+function getModelsByApplicationId(id) {
+    if (!id) {
+        const error = new TypeError('Application ID Should Not Be Empty');
+        return Promise.reject(error);
+    }
+    const query = `SELECT m.* FROM application_model am JOIN models m on am.model_id = m.model_id WHERE am.application_id = "${id}"`;
+    return execQuery(query);
+}
+
+
 function createNewApplication(application) {
     if (!application) {
         const error = new TypeError('Application ID Should Not Be Empty');
@@ -75,5 +87,6 @@ module.exports = {
     getApplicationById,
     updateApplicationById,
     createNewApplication,
-    deleteApplicationById
+    deleteApplicationById,
+    getModelsByApplicationId
 };
