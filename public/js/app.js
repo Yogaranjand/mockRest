@@ -25,6 +25,9 @@
             .when('/models/new', {
                 templateUrl: '../partials/model-create.html',
                 controller: 'modelCreationCtrl'
+            }).when('/models/info/:modelId', {
+                templateUrl: '../partials/model-info.html',
+                controller: 'modelInfoCtrl'
             })
             .otherwise('/models/new')
     }

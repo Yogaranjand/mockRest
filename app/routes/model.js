@@ -39,6 +39,25 @@ var upload = multer({ //multer settings
     storage: storage
 }).single('file');
 
+router.route('/links/:id')
+.get((req, res, next) => {
+    const { id } = req.params;
+    console.log("hello")
+    Model.getSchemaLinks(id)
+        .then((response) => {
+            let modelContent = JSON.parse(response.results[0]['model_content']);
+            let linkArr = [];
+            _.forEach(modelContent.links, (item) => {
+                let link = item.method +" - "+ item.href;
+                linkArr.push(link);
+            });
+            console.log("linkArr ===", linkArr);
+            successRespons(res, linkArr);
+        })
+        .catch(next);
+
+});
+
 router.route('/')
 
 .post((req, res, next) => {
@@ -53,6 +72,8 @@ router.route('/')
         processFile(appId);
     });
 })
+
+
 function processFile(appId) {
     let fakerData = {};
     let modelId;
@@ -88,6 +109,21 @@ function processFile(appId) {
         return AppModel.linkApplicatinModel(appId, modelId);
     }).then(() => {
         fs.unlinkSync(filePath);
+    }).then(() => {
+        return Model.getSchemaLinks(modelId);
+    }).then((response) => {
+        let modelContent = JSON.parse(response.results[0]['model_content']);
+        //console.log("response =======", modelContent);
+        let linkArr = [];
+        _.forEach(modelContent.links, (item) => {
+            let link = item.method +" - "+ item.href;
+            linkArr.push(link);
+        })
+        console.log("linkArr =======", linkArr);
+    }).then(() => {
+        return Model.prePostValidation(modelId);
+    }).then((res) => {
+        console.log();
     });
     
 }

@@ -19,7 +19,7 @@ function execQuery(query, values) {
 
 function getSchemaLinks(modelId) {
     if (!modelId) {
-        const error = new TypeError('Application ID Should Not Be Empty');
+        const error = new TypeError('Model ID Should Not Be Empty');
         return Promise.reject(error);
     }
     const query = `SELECT model_content FROM models WHERE model_id = "${modelId}"`;
@@ -52,28 +52,7 @@ function insertModelData(id, data) {
     return execQuery(query, values);
 }
 
-function prePostValidation(modelId, data) {
-    if (!data) {
-        data = {
-            title: "MR",
-            stuffWorthEmailingAbout: "Test",
-            email: "yogarajnad@nextgen.com",
-            "cc": false
-        };
-    }
-    return Promise.try(function () {
-        getSchemaLinks(modelId).then((response) => {
-            let modelContent = JSON.parse(response.results[0]['model_content']);
-            //check for required data
-            let requiredFileds = modelContent.required;
-            _.forEach(requiredFileds, (field) => {
-                if (!_.has(data, field)) {
-                    return Promise.reject('Requied field is missing : ', field);
-                }
-            });
-            return true;
-        });
-    });
+function prePostValidation (modelId) {
     
 }
 

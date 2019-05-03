@@ -30,8 +30,9 @@
                 </div>
                 <table class="table table-hover">
                     <tr ng-repeat="model in application.models">
-                        <td>Model Name</td>
-                        <td>{{model.model_name}}</td>
+                        <td>
+                            <a ng-href="#!/models/info/{{model.model_id}}" >{{model.model_name}}</a>
+                        </td>
                     </tr>
                 </table>
             </div>
