@@ -1,25 +1,48 @@
 <div class="row">
-    <div class="col-sm-6 col-md-4 col-lg-3 col-sm-offset-3 col-md-offset-4 col-lg-offset-4">
-        <div class="bg-info text-center" ng-if="message.length === 0">No API Found</div>
-        <div class="list-group" ng-if="message.length > 0">
-                <a class="list-group-item item-header" ng-if="message.length >0 ">
-                        APIs
-                </a>
-            <div class="list-group-item" ng-repeat="item in message" ng-click="getInfo(modelId, item, null)"  title="Click to get APIs">
-			    {{item}}
-			</div>
+    <div class="col-sm-6 col-md-4 col-lg-4 col-sm-offset-3 col-md-offset-4 col-lg-offset-4">
+        <div class="panel panel-success api-panel">
+            <div class="panel-heading">
+                <h4 class="form-heading text-center">List Of APIs</h4>
+            </div>
+            <div class="panel-body">
+                <div class="bg-info text-center" ng-if="message.length === 0">No API Found</div>
+                <div ng-if="message.length > 0">
+                    <a class="list-group-item" ng-repeat="item in message" ng-click="getInfo(modelId, item, null)" title="Click To get APIs"> <strong>{{item}}</strong></a>
+                </div>
+            </div>
         </div>
-
     </div>
 </div>
-<div style="margin-left:30%; width:100%" class="row" ng-if="showtextbox">
-    Please enter Id of the record
-    <input type="text" ng-model="modelDataId"/>
-    <button type="button" ng-click="triggerApi()"> Get Record</button>
+
+
+<div class="row">
+    <div class="col-sm-6 col-md-4 col-lg-4 col-sm-offset-3 col-md-offset-4 col-lg-offset-4">
+        <div class="panel panel-success api-text-panel" ng-if="showtextbox">
+            <div class="panel-body">
+                <div class="col-md-12">
+                    <div class="col-md-3">
+                        Enter Id
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" ng-model="modelDataId" />
+                    </div>
+                    <div class="col-md-3">
+                        <button type="button" class="btn btn-sm btn-primary btn-block" ng-click="triggerApi()"> Get Record</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<div class="row" ng-if="getMessagedata" style="margin-left:30%; width:100%">
-    <textarea name="" id="" cols="100" rows="10" value="getMessagedata">
-            {{getMessagedata}}
-    </textarea>
-    
+
+<div class="row">
+    <div class="col-sm-6 col-md-4 col-lg-4 col-sm-offset-3 col-md-offset-4 col-lg-offset-4">
+        <div class="panel panel-success api-text-panel" ng-if="getMessagedata">
+            <div class="panel-body">
+                <div class="col-md-12">
+                    {{getMessagedata}}
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

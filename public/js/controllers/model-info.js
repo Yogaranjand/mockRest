@@ -10,8 +10,8 @@
         $scope.showtextbox = false;
         console.log("ngwfjhgwjh");
         Model.getLinks(modelId)
-            .then((data)=> {
-                console.log("data in controller===", data );
+            .then((data) => {
+                console.log("data in controller===", data);
 
                 if (data) {
                     $scope.message = data;
@@ -28,7 +28,7 @@
             retriveData($scope.modelId, $scope.currentApi, dataid);
         }
 
-        function getInfo(modelId, api, dataid=null) {
+        function getInfo(modelId, api, dataid = null) {
             console.log("modelID ======", modelId);
             $scope.currentApi = api;
             if (api.indexOf('POST') > -1) {
@@ -39,15 +39,15 @@
             } else {
                 retriveData(modelId, api, dataid)
             }
-            
+
         }
 
         function retriveData(modelId, api, dataid) {
             Model.getAPIDetails(modelId, api, dataid)
-            .then((res) => {
-                console.log("res 66666>>>>>", res);
-                $scope.getMessagedata = JSON.stringify(res.results).replace(/\//g, '');
-            });
+                .then((res) => {
+                    console.log("res 66666>>>>>", res);
+                    $scope.getMessagedata = JSON.stringify(res.results).replace(/\//g, '');
+                });
         }
 
     }
