@@ -56,10 +56,10 @@
 
         function retriveData(modelId, api, dataid) {
             Model.getAPIDetails(modelId, api, dataid)
-            .then((res) => {
-                console.log("res 66666>>>>>", res);
-                $scope.getMessagedata = JSON.stringify(res.results).replace(/\//g, '');
-            });
+                .then((res) => {
+                    console.log("res 66666>>>>>", res);
+                    $scope.getMessagedata = JSON.stringify(res.results).replace(/\//g, '');
+                });
         }
 
     }

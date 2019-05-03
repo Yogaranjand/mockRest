@@ -50,6 +50,14 @@ body {
     margin-top: 30%;
 }
 
+.api-panel {
+    margin-top: 10% !important;
+}
+
+.api-text-panel {
+    margin-top: 5% !important;
+}
+
 .panel-heading {
     text-align: center;
     background-color: rgb(226, 137, 85) !important;
@@ -72,4 +80,8 @@ body {
 
 .file-upload {
     margin-top: 15px;
+}
+
+tr {
+    cursor: pointer;
 }
