@@ -81,6 +81,25 @@ router.route('/apilist/:modelId/:api/:modelDataId')
         
 
 });
+router.route('/createRecord')
+.post((req, res, next) => {
+    console.log(JSON.stringify(req.body));
+    let { data, modelId } = req.body;
+    console.log("modelId =====", modelId);
+    console.log("data =====", data);
+    data = JSON.stringify(data);
+    Model.prePostValidation(modelId, data).then(() => {
+        ModelData.insertModelData(modelId, data)
+        .then(data => {
+            const { results } = data;
+            successRespons(res, results)
+        })
+        .catch(next);
+    }).catch((e) => {
+        throw new error(e);
+    })
+   
+})
 
 router.route('/')
 

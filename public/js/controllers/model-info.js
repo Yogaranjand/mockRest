@@ -26,7 +26,11 @@
         $scope.postModeldata = postModeldata;
 
         function postModeldata(data) {
-
+            Model.create(data, $scope.modelId) 
+                .then((res) => {
+                    console.log("res post 000000>>>>>", res);
+                    //$scope.getMessagedata = JSON.stringify(res.results).replace(/\//g, '');
+                });
         }
 
         function triggerApi(dataid) {
