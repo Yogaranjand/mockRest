@@ -13,7 +13,7 @@
                 const { isSuccess } = data;
 
                 if (isSuccess) {
-                    const { application_name, application_acronym } = data.Application;
+                    const { application_name, application_acronym } = data.application;
 
                     const applicationObj = {
                         applicationName: application_name,

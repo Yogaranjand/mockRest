@@ -26,6 +26,24 @@ function getSchemaLinks(modelId) {
     return execQuery(query);
 }
 
+function getModelData(modelId) {
+    if (!modelId) {
+        const error = new TypeError('modelId ID Should Not Be Empty');
+        return Promise.reject(error);
+    }
+    const query = `SELECT model_data_id, data FROM model_data WHERE model_id = "${modelId}"`;
+    return execQuery(query);
+}
+
+function getModelDataById(id) {
+    if (!modelId) {
+        const error = new TypeError('id ID Should Not Be Empty');
+        return Promise.reject(error);
+    }
+    const query = `SELECT data FROM model_data WHERE model_data_id = "${id}"`;
+    return execQuery(query);
+}
+
 function createNewModel(model, modelName) {
     if (!model) {
         const error = new TypeError('model Should Not Be Empty');
@@ -60,5 +78,7 @@ module.exports = {
     createNewModel,
     insertModelData,
     getSchemaLinks,
-    prePostValidation
+    prePostValidation,
+    getModelData,
+    getModelDataById
 };

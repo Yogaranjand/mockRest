@@ -1,19 +1,27 @@
 <div class="row">
-    <div class="col-sm-6 col-md-4 col-lg-3 col-sm-offset-3 col-md-offset-4 col-lg-offset-4">
-        <form id="application-form" ng-submit="createApplication()" name="applicationForm">
-            <h4 class="form-heading text-center">Create Application</h4>
-            <div class="form-group">
-                <input class="form-control" type="text" ng-model="application.applicationName" name="applicationName" placeholder="Enter Your Application Name" ng-required="true">
+    <div class="col-sm-6 col-md-4 col-lg-4 col-sm-offset-3 col-md-offset-4 col-lg-offset-4">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h4 class="form-heading text-center">Create Application</h4>
             </div>
-            <div class="form-group">
-                <input class="form-control" type="text" ng-model="application.acronym" name="acronym" placeholder="Enter Your Application Acronym" ng-required="true">
+            <div class="panel-body">
+                <form id="application-form" ng-submit="createApplication()" name="applicationForm">
+
+                    <div class="form-group">
+                        <input class="form-control" type="text" ng-model="application.applicationName" name="applicationName" placeholder="Enter Your Application Name" ng-required="true">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="text" ng-model="application.acronym" name="acronym" placeholder="Enter Your Application Acronym" ng-required="true">
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-block" ng-disabled="applicationForm.$invalid">Submit</button>
+                    </div>
+                </form>
+                <div ng-class="{ 'bg-success': isSuccess, 'bg-danger': !isSuccess }" ng-if="isSubmitted">
+                    {{message}}</div>
+                <a href="#!/applications">List Of All Applications</a>
+
             </div>
-            <div class="form-group">
-                <button class="btn btn-primary btn-block" ng-disabled="applicationForm.$invalid">Create Application</button>
-            </div>
-        </form>
-        <div ng-class="{ 'bg-success': isSuccess, 'bg-danger': !isSuccess }" ng-if="isSubmitted">
-            {{message}}</div>
-        <a href="#!/applications">List Of All Applications</a>
+        </div>
     </div>
 </div>

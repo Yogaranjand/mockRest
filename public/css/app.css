@@ -6,7 +6,7 @@
 
 #application-form,
 #application-update-form {
-    margin-top: 35%;
+    margin-top: 5%;
 }
 
 #application-update-form .form-heading,
@@ -33,20 +33,43 @@
     margin-right: 5px;
     margin-top: -5px;
 }
- .item-header
- {
+
+.item-header {
     text-align: center;
     background-color: rgb(238, 128, 84);
     font-weight: bold;
- }
+}
 
- body {
+body {
     background-image: url("https://visme.co/blog/wp-content/uploads/2017/07/50-Beautiful-and-Minimalist-Presentation-Backgrounds-08.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    }
-.panel-heading 
-{
+}
+
+.panel {
+    margin-top: 30%;
+}
+
+.panel-heading {
     text-align: center;
     background-color: rgb(226, 137, 85) !important;
+    color: white !important;
+}
+
+.navbar {
+    border-radius: 0px;
+}
+
+.navbar-brand>img {
+    display: inline-block;
+    padding-left: 10px;
+    height: 24px;
+}
+
+.models a:hover {
+    text-decoration: none;
+}
+
+.file-upload {
+    margin-top: 15px;
 }

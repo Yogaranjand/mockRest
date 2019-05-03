@@ -1,11 +1,13 @@
 <div class="row">
-    <div class="col-sm-6 col-md-4 col-lg-3 col-sm-offset-3 col-md-offset-4 col-lg-offset-4">
-        <div class="bg-info text-center" ng-if="aListCtrl.applications.length === 0">No Applications</div>
-        <div class="list-group" ng-if="aListCtrl.applications.length > 0">
-                <a class="list-group-item item-header" ng-if="aListCtrl.applications.length >0 ">
-                        Application Name
-                    </a>
-            <a class="list-group-item" ng-repeat="application in aListCtrl.applications" ng-href="#!/applications/info/{{application.id}}" title="Click To See The Application Details">{{application.applicatioName}} ( {{application.acronym}} )
+    <div class="col-sm-6 col-md-4 col-lg-4 col-sm-offset-3 col-md-offset-4 col-lg-offset-4">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h4 class="form-heading text-center">List Of Applications</h4>
+            </div>
+            <div class="panel-body">
+                <div class="bg-info text-center" ng-if="aListCtrl.applications.length === 0">No Application</div>
+                <div ng-if="aListCtrl.applications.length > 0">
+                    <a class="list-group-item" ng-repeat="application in aListCtrl.applications" ng-href="#!/applications/info/{{application.id}}" title="Click To See The Application Details">{{application.applicatioName}} ( {{application.acronym}} )
 			    <button type="button" class="btn btn-info btn-sm pull-right action-application-edit" title="Click To Edit Application" ng-click="aListCtrl.goToUpdateApplicationView($event, application)">
 					<span class="glyphicon glyphicon-edit"></span>
 				</button>
@@ -13,9 +15,13 @@
 					<span class="glyphicon glyphicon-trash"></span>
 				</button>
 			</a>
-        </div>
-        <br>
-        <a class="btn btn-warning" href="#!/applications/new">Create New Application</a>
+                </div>
+                <br>
+                <div class="text-center">
+                    <a class="btn btn-info" href="#!/applications/new">Create New Application</a>
+                </div>
 
+            </div>
+        </div>
     </div>
 </div>

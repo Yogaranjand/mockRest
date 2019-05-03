@@ -4,11 +4,22 @@
         <div class="list-group" ng-if="message.length > 0">
                 <a class="list-group-item item-header" ng-if="message.length >0 ">
                         APIs
-                    </a>
-            <a class="list-group-item" ng-repeat="item in message" ng-href="#!/applications/info/{{application.id}}" title="Click To See The Application Details">{{item}}
-			    
-			</a>
+                </a>
+            <div class="list-group-item" ng-repeat="item in message" ng-click="getInfo(modelId, item, null)"  title="Click to get APIs">
+			    {{item}}
+			</div>
         </div>
 
     </div>
+</div>
+<div style="margin-left:30%; width:100%" class="row" ng-if="showtextbox">
+    Please enter Id of the record
+    <input type="text" ng-model="modelDataId"/>
+    <button type="button" ng-click="triggerApi()"> Get Record</button>
+</div>
+<div class="row" ng-if="getMessagedata" style="margin-left:30%; width:100%">
+    <textarea name="" id="" cols="100" rows="10" value="getMessagedata">
+            {{getMessagedata}}
+    </textarea>
+    
 </div>
