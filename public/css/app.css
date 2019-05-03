@@ -33,3 +33,20 @@
     margin-right: 5px;
     margin-top: -5px;
 }
+ .item-header
+ {
+    text-align: center;
+    background-color: rgb(238, 128, 84);
+    font-weight: bold;
+ }
+
+ body {
+    background-image: url("https://visme.co/blog/wp-content/uploads/2017/07/50-Beautiful-and-Minimalist-Presentation-Backgrounds-08.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    }
+.panel-heading 
+{
+    text-align: center;
+    background-color: rgb(226, 137, 85) !important;
+}
