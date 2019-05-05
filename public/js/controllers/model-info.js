@@ -9,13 +9,13 @@
         $scope.modelId = modelId;
         $scope.showtextbox = false;
         $scope.invalidData = false;
-        $scope.dataid ='';
+        $scope.dataid = '';
         $scope.requiredArr;
         $scope.putId;
         console.log("ngwfjhgwjh");
         Model.getLinks(modelId)
-            .then((data)=> {
-                console.log("data in controller===", data );
+            .then((data) => {
+                console.log("data in controller===", data);
                 if (data) {
                     let linkArr = [];
                     data.links.forEach((item) => {
@@ -52,14 +52,14 @@
                 if (!dataArr[field]) {
                     $scope.invalidData = true;
                     console.log("please provide correct format!!.");
-                   return false;
+                    return false;
                 }
             });
             if (!$scope.invalidData) {
-                Model.create(data, $scope.modelId) 
-                .then((res) => {
-                    $scope.postPayload = false;
-                });
+                Model.create(data, $scope.modelId)
+                    .then((res) => {
+                        $scope.postPayload = false;
+                    });
             }
         }
 
@@ -77,14 +77,14 @@
                 if (!dataArr[field]) {
                     $scope.invalidData = true;
                     console.log("please provide correct format!!.");
-                   return false;
+                    return false;
                 }
             });
             if (!$scope.invalidData) {
-                Model.update(data, id) 
-                .then((res) => {
-                    $scope.postPayload = false;
-                });
+                Model.update(data, id)
+                    .then((res) => {
+                        $scope.postPayload = false;
+                    });
             }
         }
 
@@ -93,7 +93,7 @@
             retriveData($scope.modelId, $scope.currentApi, dataid);
         }
 
-        function getInfo(modelId, api, dataid=null) {
+        function getInfo(modelId, api, dataid = null) {
             $scope.getMessagedata = '';
             console.log("modelID ======", modelId);
             $scope.showtextbox = false;
@@ -116,17 +116,23 @@
             } else {
                 $scope.showtextbox = false;
                 retriveData(modelId, api, dataid)
-            } 
+            }
         }
 
         function retriveData(modelId, api, dataid) {
             Model.getAPIDetails(modelId, api, dataid)
                 .then((res) => {
-                    console.log("res 66666>>>>>", res);
-                    $scope.getMessagedata = JSON.stringify(res.results).replace(/\//g, '');
+                    var results = res.results;
+                    var formattedResult = [];
+                    angular.forEach(results, function(result) {
+                        formattedResult.push({
+                            model_data_id: result.model_data_id,
+                            data: JSON.parse(result.data.replace(/\\/g, ''))
+                        });
+                    })
+                    $scope.getMessagedata = formattedResult;
                 });
         }
-
     }
 
 })();
