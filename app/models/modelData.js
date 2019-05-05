@@ -27,9 +27,7 @@ function getSchemaLinks(modelId) {
 }
 
 function getModelData(modelId) {
-    console.log("modelId ====", modelId);
     modelId = parseInt(modelId);
-    console.log("modelId 222====", modelId);
     if (!modelId) {
         const error = new TypeError('modelId ID Should Not Be Empty');
         return Promise.reject(error);

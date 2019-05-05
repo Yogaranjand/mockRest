@@ -85,3 +85,10 @@ body {
 tr {
     cursor: pointer;
 }
+.error-dsiplay {
+    padding-left: 10px;
+    height: 24px;
+    margin: 10px;
+    background-color: darksalmon;
+    color: white;
+}

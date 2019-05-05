@@ -47,13 +47,14 @@ router.route('/links/:id')
         Model.getSchemaLinks(id)
             .then((response) => {
                 let modelContent = JSON.parse(response.results[0]['model_content']);
+                console.log("modelContent =====", modelContent);
                 let linkArr = [];
-                _.forEach(modelContent.links, (item) => {
-                    let link = item.method + " - " + item.href;
-                    linkArr.push(link);
-                });
-                console.log("linkArr ===", linkArr);
-                successRespons(res, linkArr);
+                // _.forEach(modelContent.links, (item) => {
+                //     let link = item.method + " - " + item.href;
+                //     linkArr.push(link);
+                // });
+                // console.log("linkArr ===", linkArr);
+                successRespons(res, modelContent);
             })
             .catch(next);
 
@@ -83,21 +84,14 @@ router.route('/apilist/:modelId/:api/:modelDataId')
 });
 router.route('/createRecord')
 .post((req, res, next) => {
-    console.log(JSON.stringify(req.body));
     let { data, modelId } = req.body;
-    console.log("modelId =====", modelId);
-    console.log("data =====", data);
     data = JSON.stringify(data);
-    Model.prePostValidation(modelId, data).then(() => {
-        ModelData.insertModelData(modelId, data)
+    ModelData.insertModelData(modelId, data)
         .then(data => {
             const { results } = data;
             successRespons(res, results)
         })
         .catch(next);
-    }).catch((e) => {
-        throw new error(e);
-    })
    
 })
 

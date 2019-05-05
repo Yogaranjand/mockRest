@@ -61,20 +61,20 @@ function prePostValidation(modelId, data) {
             "cc": false
         };
     }
-    return Promise.try(function () {
-        getSchemaLinks(modelId).then((response) => {
-            let modelContent = JSON.parse(response.results[0]['model_content']);
+    return new Promise((resolve, reject) => {
+       return  getSchemaLinks(modelId);
+    }).then((response) => {
+        let modelContent = JSON.parse(response.results[0]['model_content']);
             //check for required data
             let requiredFileds = modelContent.required;
             _.forEach(requiredFileds, (field) => {
-                if (!_.has(data, field)) {
-                    return Promise.reject('Requied field is missing : ', field);
+                console.log('filed ===', field)
+                if (!data[field]) {
+                   return reject("Required Filed is missing", field);
                 }
             });
             return true;
-        });
     });
-    
 }
 
 module.exports = {

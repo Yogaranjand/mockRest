@@ -8,13 +8,22 @@
         const { modelId } = $routeParams;
         $scope.modelId = modelId;
         $scope.showtextbox = false;
+        $scope.invalidData = false;
         $scope.dataid ='';
+        $scope.requiredArr;
         console.log("ngwfjhgwjh");
         Model.getLinks(modelId)
             .then((data)=> {
                 console.log("data in controller===", data );
                 if (data) {
-                    $scope.message = data;
+                    let linkArr = [];
+                    data.links.forEach((item) => {
+                        let link = item.method + " - " + item.href;
+                        linkArr.push(link);
+                    });
+                    console.log("linkArr ===", linkArr);
+                    $scope.requiredArr = data.required;
+                    $scope.message = linkArr;
 
                 } else {
                     $scope.isApplicationExist = false;
@@ -26,11 +35,30 @@
         $scope.postModeldata = postModeldata;
 
         function postModeldata(data) {
-            Model.create(data, $scope.modelId) 
+            console.log('data ===', data);
+            console.log('typeof data ===', typeof data);
+            let dataArr;
+            try {
+                dataArr = JSON.parse(data);
+            } catch (e) {
+                $scope.invalidData = true;
+            }
+            console.log('dataArr ===', dataArr);
+            $scope.requiredArr.forEach((field) => {
+                console.log('filed ===', field);
+                console.log('data[field] ===', dataArr[field])
+                if (!dataArr[field]) {
+                    $scope.invalidData = true;
+                    console.log("please provide correct format!!.");
+                   return false;
+                }
+            });
+            if (!$scope.invalidData) {
+                Model.create(data, $scope.modelId) 
                 .then((res) => {
-                    console.log("res post 000000>>>>>", res);
-                    //$scope.getMessagedata = JSON.stringify(res.results).replace(/\//g, '');
+                    $scope.postPayload = false;
                 });
+            }
         }
 
         function triggerApi(dataid) {
