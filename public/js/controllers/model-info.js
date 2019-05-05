@@ -105,7 +105,7 @@
                 $scope.showtextbox = false;
                 $scope.postPayload = true;
 
-            } else if (api.indexOf('PATCH') > -1) {
+            } else if (api.indexOf('PUT') > -1) {
                 $scope.getMessagedata = false;
                 $scope.showtextbox = false;
                 $scope.putPayload = true;
