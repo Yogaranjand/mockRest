@@ -61,6 +61,25 @@
                     console.log("error >>>>>>", err);
                 })
         }
+        function update(payload, modelDataId) {
+            if (!modelDataId || !payload) {
+                return Promise.reject('All Fields Are Mandatory');
+            }
+            const payloadObj = { data: payload, modelDataId: modelDataId }
+            let url = '/api/models/updateRecord';
+            return $http.post(url, payloadObj)
+                .then(res => {
+                    const { isSuccess, data } = res.data;
+                    console.log(" data createcreatecreatecreate====", data);
+                    if (data) {
+                        const message = isSuccess ? 'Data updated successfully' : 'Sorry Try Again !';
+                        const colorClass = isSuccess ? 'success' : 'error';
+                        $.notify(message, colorClass);
+                    }
+                }, error => {
+                    console.log("error >>>>>>", err);
+                })
+        }
         function generateObjectForNotifyJs(message, isSuccess) {
             const colorClass = isSuccess ? 'success' : 'error';
             const NofyJsObj = { message, isSuccess, colorClass };
@@ -70,7 +89,8 @@
         return {
             getLinks: getLinks,
             getAPIDetails: getAPIDetails,
-            create: create
+            create: create,
+            update: update
         }
 
     }

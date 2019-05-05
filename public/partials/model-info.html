@@ -61,6 +61,26 @@
             </div>
         </div>
     </div>
+
+<div class="row">
+        <div class="col-sm-6 col-md-4 col-lg-4 col-sm-offset-3 col-md-offset-4 col-lg-offset-4">
+            <div class="panel panel-success api-text-panel" ng-if="putPayload">
+                <div class="panel-body">
+                        <div>Enter Id</div>
+                            <div>
+                                <input type="text" ng-model="putDataId" />
+                            </div>
+                        <div>
+                                <textarea name="" id="" cols="100" rows="10" ng-model="payload">
+                                </textarea>
+                        </div>
+                        <div>
+                                <button type="button" ng-click="putModeldata(payload, putDataId)"> Update Record</button>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
 <div class="error-dsiplay" ng-if="invalidData">
     Please provide a valid payload.
 </div>

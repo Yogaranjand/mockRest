@@ -11,6 +11,7 @@
         $scope.invalidData = false;
         $scope.dataid ='';
         $scope.requiredArr;
+        $scope.putId;
         console.log("ngwfjhgwjh");
         Model.getLinks(modelId)
             .then((data)=> {
@@ -33,6 +34,7 @@
         $scope.getInfo = getInfo;
         $scope.triggerApi = triggerApi;
         $scope.postModeldata = postModeldata;
+        $scope.putModeldata = putModeldata;
 
         function postModeldata(data) {
             console.log('data ===', data);
@@ -61,6 +63,31 @@
             }
         }
 
+        function putModeldata(data, id) {
+            let dataArr;
+            try {
+                dataArr = JSON.parse(data);
+            } catch (e) {
+                $scope.invalidData = true;
+            }
+            console.log('dataArr ===', dataArr);
+            $scope.requiredArr.forEach((field) => {
+                console.log('filed ===', field);
+                console.log('data[field] ===', dataArr[field])
+                if (!dataArr[field]) {
+                    $scope.invalidData = true;
+                    console.log("please provide correct format!!.");
+                   return false;
+                }
+            });
+            if (!$scope.invalidData) {
+                Model.update(data, id) 
+                .then((res) => {
+                    $scope.postPayload = false;
+                });
+            }
+        }
+
         function triggerApi(dataid) {
             console.log("$scope.dataid", dataid);
             retriveData($scope.modelId, $scope.currentApi, dataid);
@@ -71,11 +98,17 @@
             console.log("modelID ======", modelId);
             $scope.showtextbox = false;
             $scope.postPayload = false;
+            $scope.putPayload = false;
             $scope.currentApi = api;
             if (api.indexOf('POST') > -1) {
                 $scope.getMessagedata = false;
                 $scope.showtextbox = false;
                 $scope.postPayload = true;
+
+            } else if (api.indexOf('PATCH') > -1) {
+                $scope.getMessagedata = false;
+                $scope.showtextbox = false;
+                $scope.putPayload = true;
 
             } else if (api.indexOf('{id}') > -1) {
                 $scope.showtextbox = true;

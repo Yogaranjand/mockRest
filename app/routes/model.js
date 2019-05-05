@@ -82,6 +82,22 @@ router.route('/apilist/:modelId/:api/:modelDataId')
         
 
 });
+
+router.route('/updateRecord')
+.post((req, res, next) => {
+    let { data, modelDataId } = req.body;
+    //data = JSON.stringify(data);
+    console.log("update data ===", data);
+    ModelData.updateModelData(modelDataId, data)
+        .then(data => {
+            const { results } = data;
+            console.log("modelDataId ===", modelDataId);
+            console.log("results in  updateRecord===", results);
+            successRespons(res, results)
+        })
+        .catch(next);
+   
+});
 router.route('/createRecord')
 .post((req, res, next) => {
     let { data, modelId } = req.body;

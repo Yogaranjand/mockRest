@@ -71,6 +71,18 @@ function insertModelData(id, data) {
     return execQuery(query, values);
 }
 
+function updateModelData(id, data) {
+    if (!id) {
+        const error = new TypeError('id Should Not Be Empty');
+        return Promise.reject(error);
+    }
+    const query = `UPDATE model_data SET ? WHERE model_data_id = "${id}"`
+    const values = {
+        data: data
+    };
+    return execQuery(query, values);
+}
+
 function prePostValidation (modelId) {
     
 }
@@ -81,5 +93,6 @@ module.exports = {
     getSchemaLinks,
     prePostValidation,
     getModelData,
-    getModelDataById
+    getModelDataById,
+    updateModelData
 };
