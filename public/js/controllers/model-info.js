@@ -130,7 +130,13 @@
                             data: JSON.parse(result.data.replace(/\\/g, ''))
                         });
                     })
-                    $scope.getMessagedata = formattedResult;
+                    if (formattedResult) {
+                        $scope.getMessagedata = formattedResult;
+                    } else {
+                        $scope.getMessagedata = false;
+                    }
+                    console.log($scope.getMessagedata);
+                    
                 });
         }
     }
